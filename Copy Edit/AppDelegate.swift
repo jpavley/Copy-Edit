@@ -23,10 +23,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         copyEditMenu.addItem(NSMenuItem(title: "Plain Text", action: #selector(AppDelegate.plainText), keyEquivalent: ""))
         copyEditMenu.addItem(NSMenuItem.separator())
-        copyEditMenu.addItem(NSMenuItem(title: "Markdown Text", action: #selector(AppDelegate.plainText), keyEquivalent: ""))
+        copyEditMenu.addItem(NSMenuItem(title: "Markdown Paragraph", action: #selector(AppDelegate.plainText), keyEquivalent: ""))
         copyEditMenu.addItem(NSMenuItem(title: "Markdown Link", action: #selector(AppDelegate.plainText), keyEquivalent: ""))
         copyEditMenu.addItem(NSMenuItem.separator())
-        copyEditMenu.addItem(NSMenuItem(title: "HTML Text", action: #selector(AppDelegate.plainText), keyEquivalent: ""))
+        copyEditMenu.addItem(NSMenuItem(title: "HTML Paragraph", action: #selector(AppDelegate.plainText), keyEquivalent: ""))
         copyEditMenu.addItem(NSMenuItem(title: "HTML Link", action: #selector(AppDelegate.plainText), keyEquivalent: ""))
         copyEditMenu.addItem(NSMenuItem(title: "HTML Escaped", action: #selector(AppDelegate.plainText), keyEquivalent: ""))
         
@@ -38,8 +38,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
     
+    func getPlainText() -> String? {
+        if let items = NSPasteboard.general().pasteboardItems {
+            for item in items {
+                for type in item.types {
+                    if type == "public.utf8-plain-text" {
+                        if let userText = item.string(forType: type) {
+                            return userText
+                        }
+                    }
+                }
+            }
+        }
+        return nil
+    }
+    
     func plainText() {
-        
+        if let userText = getPlainText() {
+            NSPasteboard.general().clearContents()
+            NSPasteboard.general().setString(userText, forType: "public.html")
+            NSPasteboard.general().setString(userText, forType: "public.utf8-plain-text")
+        }
     }
     
     func markdownText() {
