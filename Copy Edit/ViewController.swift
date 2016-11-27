@@ -19,8 +19,7 @@ class ViewController: NSViewController {
         // Do any additional setup after loading the view.
         
         logger.isEditable = false
-        
-        
+        logger.textStorage?.mutableString.setString(logPasteboard())
     }
 
     override var representedObject: Any? {
@@ -28,7 +27,6 @@ class ViewController: NSViewController {
         // Update the view, if already loaded.
         }
     }
-
-
+    
 }
 

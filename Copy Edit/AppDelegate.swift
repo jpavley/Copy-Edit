@@ -52,7 +52,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         return nil
     }
-    
+        
     /// Removes all expressions of the text on the Pasteboard except for the plain text version.
     /// Trims whitespace and new line characters before and after the text.
     func plainText() {
@@ -63,7 +63,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             
             NSPasteboard.general().setString(trimnedString, forType: "public.html")
             NSPasteboard.general().setString(trimnedString, forType: "public.utf8-plain-text")
+            
         }
+        
     }
     
     func markdownText() {
