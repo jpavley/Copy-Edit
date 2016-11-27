@@ -48,19 +48,36 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
     
+    /// Returns utf8 plain text item on Pasteboard.
+    /// Trims off leading and training whitespace and new lines.
     func getPlainText() -> String? {
         if let items = NSPasteboard.general().pasteboardItems {
             for item in items {
                 for type in item.types {
                     if type == "public.utf8-plain-text" {
                         if let userText = item.string(forType: type) {
-                            return userText
+                            let trimnedString = userText.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+                            return trimnedString
                         }
                     }
                 }
             }
         }
         return nil
+    }
+    
+    /// Returns true if the input string matches a regular expression matching a standard URL.
+    /// Source: https://regex101.com/r/jO2mS6/1/codegen?language=java
+    func validateURLString(_ urlString: String) -> Bool {
+        let pattern = "(^|\\s)((https?:\\/\\/)?[\\w-]+(\\.[a-z-]+)+\\.?(:\\d+)?(\\/\\S*)?)"
+        let regex = try! NSRegularExpression(pattern: pattern, options: [])
+        let matches = regex.matches(in: urlString, options: [], range: NSRange(location: 0, length: urlString.characters.count))
+        
+        if matches.count > 0 {
+            return true
+        } else {
+            return false
+        }
     }
     
     /// Logs what is currently on Pasteboard.
@@ -76,11 +93,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func plainText() {
         if let userText = getPlainText() {
             NSPasteboard.general().clearContents()
-            
-            let trimnedString = userText.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            
-            // NSPasteboard.general().setString(trimnedString, forType: "public.html")
-            NSPasteboard.general().setString(trimnedString, forType: "public.utf8-plain-text")
+            NSPasteboard.general().setString(userText, forType: "public.utf8-plain-text")
             
             if let rootViewController = rootController {
                 rootViewController.logger.textStorage?.mutableString.setString(logPasteboard())
@@ -95,18 +108,56 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func markdownLink() {
+        // [an example](http://example.com/)
+        
+        if let userText = getPlainText() {
+            
+            // NOTE: NSURL thinks that cat.com(cat.com) is a valid URL so I validate with a regular expression first
+            
+            if !validateURLString(userText) {
+                return
+            }
+            
+            if let _ = NSURL(string: userText) {
+                NSPasteboard.general().clearContents()
+                
+                var finalURL = ""
+                
+                if userText.hasPrefix("http://") || userText.hasPrefix("https://") {
+                    finalURL = userText
+                } else {
+                    finalURL = "http://\(userText)"
+                }
+                
+                NSPasteboard.general().setString("[\(userText)](\(finalURL))", forType: "public.utf8-plain-text")
+                
+                if let rootViewController = rootController {
+                    rootViewController.logger.textStorage?.mutableString.setString(logPasteboard())
+                }
+            }
+        }
+        
         
     }
     
     func htmlText() {
-        
     }
     
     func htmlLink() {
+        // <a href="http://example.com/">example.com</a>
         
         if let userText = getPlainText() {
             
+            // TODO: if the userText is a valid Markdown link consider extracting the link so it can be converted to an HTML link
+            
+            // NOTE: NSURL thinks that cat.com(cat.com) is a valid URL so I validate with a regular expression first
+            
+            if !validateURLString(userText) {
+                return
+            }
+            
             if let _ = NSURL(string: userText) {
+                
                 NSPasteboard.general().clearContents()
 
                 var finalURL = ""
