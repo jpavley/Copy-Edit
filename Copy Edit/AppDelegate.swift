@@ -53,11 +53,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return nil
     }
     
+    /// Removes all expressions of the text on the Pasteboard except for the plain text version.
+    /// Trims whitespace and new line characters before and after the text.
     func plainText() {
         if let userText = getPlainText() {
             NSPasteboard.general().clearContents()
-            NSPasteboard.general().setString(userText, forType: "public.html")
-            NSPasteboard.general().setString(userText, forType: "public.utf8-plain-text")
+            
+            let trimnedString = userText.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            
+            NSPasteboard.general().setString(trimnedString, forType: "public.html")
+            NSPasteboard.general().setString(trimnedString, forType: "public.utf8-plain-text")
         }
     }
     
