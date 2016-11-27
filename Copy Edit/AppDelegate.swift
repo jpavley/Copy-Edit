@@ -26,12 +26,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         copyEditMenu.addItem(NSMenuItem.separator())
         copyEditMenu.addItem(NSMenuItem(title: "Plain Text", action: #selector(AppDelegate.plainText), keyEquivalent: ""))
         copyEditMenu.addItem(NSMenuItem.separator())
-        copyEditMenu.addItem(NSMenuItem(title: "Markdown Text", action: #selector(AppDelegate.plainText), keyEquivalent: ""))
-        copyEditMenu.addItem(NSMenuItem(title: "Markdown Link", action: #selector(AppDelegate.plainText), keyEquivalent: ""))
+        copyEditMenu.addItem(NSMenuItem(title: "Markdown Text", action: #selector(AppDelegate.markdownText), keyEquivalent: ""))
+        copyEditMenu.addItem(NSMenuItem(title: "Markdown Link", action: #selector(AppDelegate.markdownLink), keyEquivalent: ""))
         copyEditMenu.addItem(NSMenuItem.separator())
-        copyEditMenu.addItem(NSMenuItem(title: "HTML Text", action: #selector(AppDelegate.plainText), keyEquivalent: ""))
-        copyEditMenu.addItem(NSMenuItem(title: "HTML Link", action: #selector(AppDelegate.plainText), keyEquivalent: ""))
-        copyEditMenu.addItem(NSMenuItem(title: "HTML Escaped", action: #selector(AppDelegate.plainText), keyEquivalent: ""))
+        copyEditMenu.addItem(NSMenuItem(title: "HTML Text", action: #selector(AppDelegate.htmlText), keyEquivalent: ""))
+        copyEditMenu.addItem(NSMenuItem(title: "HTML Link", action: #selector(AppDelegate.htmlLink), keyEquivalent: ""))
+        copyEditMenu.addItem(NSMenuItem(title: "HTML Escaped", action: #selector(AppDelegate.htmlEscaped), keyEquivalent: ""))
         
         copyEditStatusItem?.menu = copyEditMenu
         
@@ -103,7 +103,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func htmlLink() {
-    
+        
+        if let userText = getPlainText() {
+            
+            if let _ = NSURL(string: userText) {
+                NSPasteboard.general().clearContents()
+
+                var finalURL = ""
+                
+                if userText.hasPrefix("http://") || userText.hasPrefix("https://") {
+                    finalURL = userText
+                } else {
+                    finalURL = "http://\(userText)"
+                }
+                
+                NSPasteboard.general().setString("<a href=\"\(finalURL)\">\(userText)</a>", forType: "public.html")
+                NSPasteboard.general().setString(finalURL, forType: "public.utf8-plain-text")
+                
+                if let rootViewController = rootController {
+                    rootViewController.logger.textStorage?.mutableString.setString(logPasteboard())
+                }
+            }
+        }
     }
     
     func htmlEscaped() {
