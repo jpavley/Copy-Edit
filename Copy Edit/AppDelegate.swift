@@ -13,6 +13,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     var copyEditStatusItem: NSStatusItem?
     var rootController: ViewController?
+    
+    // Regex patterns source: https://regex101.com
+    let markdownLinkPattern = "(\\[(.*?)\\])(\\((.*?)\\))"
+    let htmlLinkPattern = "(^|\\s)((https?:\\/\\/)?[\\w-]+(\\.[a-z-]+)+\\.?(:\\d+)?(\\/\\S*)?)"
+    let parenthesesPattern = "\\((.*?)\\)"
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
@@ -66,10 +71,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return nil
     }
     
-    /// Returns true if the input string matches a regular expression matching a standard URL.
-    /// Source: https://regex101.com/r/jO2mS6/1/codegen?language=java
-    func validateURLString(_ urlString: String) -> Bool {
-        let pattern = "(^|\\s)((https?:\\/\\/)?[\\w-]+(\\.[a-z-]+)+\\.?(:\\d+)?(\\/\\S*)?)"
+    /// Returns true if the input string matches a regular expression.
+    func validateURLString(urlString: String, pattern: String) -> Bool {
         let regex = try! NSRegularExpression(pattern: pattern, options: [])
         let matches = regex.matches(in: urlString, options: [], range: NSRange(location: 0, length: urlString.characters.count))
         
@@ -79,6 +82,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return false
         }
     }
+    
+    /// Returns array of strings that match a regular expression pattern.
+    /// Source: http://stackoverflow.com/questions/27880650/swift-extract-regex-matches
+    func regexMatches(for regex: String, in text: String) -> [String] {
+        do {
+            let regex = try NSRegularExpression(pattern: regex)
+            let nsString = text as NSString
+            let results = regex.matches(in: text, range: NSRange(location: 0, length: nsString.length))
+            return results.map { nsString.substring(with: $0.range)}
+        } catch let error {
+            print("invalid regex: \(error.localizedDescription)")
+            return []
+        }
+    }
+
     
     /// Logs what is currently on Pasteboard.
     func current() {
@@ -114,7 +132,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             
             // NOTE: NSURL thinks that cat.com(cat.com) is a valid URL so I validate with a regular expression first
             
-            if !validateURLString(userText) {
+            if !validateURLString(urlString: userText, pattern: htmlLinkPattern) {
                 return
             }
             
@@ -148,27 +166,42 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         if let userText = getPlainText() {
             
-            // TODO: if the userText is a valid Markdown link consider extracting the link so it can be converted to an HTML link
+            var candidateURL = ""
+            
+            // NOTE: if the userText is a valid Markdown link extract the link so it can be converted to an HTML link
+            
+            if validateURLString(urlString: userText, pattern: markdownLinkPattern) {
+                let matches = regexMatches(for: parenthesesPattern, in: userText)
+                if matches.count > 0 {
+                    let matchedURL = matches[0]
+                    candidateURL = matchedURL.trimmingCharacters(in: CharacterSet.punctuationCharacters)
+                    // print(candidateURL)
+                }
+            }
+            
+            if candidateURL.characters.count == 0 {
+                candidateURL = userText
+            }
             
             // NOTE: NSURL thinks that cat.com(cat.com) is a valid URL so I validate with a regular expression first
             
-            if !validateURLString(userText) {
+            if !validateURLString(urlString: candidateURL, pattern: htmlLinkPattern) {
                 return
             }
             
-            if let _ = NSURL(string: userText) {
+            if let _ = NSURL(string: candidateURL) {
                 
                 NSPasteboard.general().clearContents()
 
                 var finalURL = ""
                 
-                if userText.hasPrefix("http://") || userText.hasPrefix("https://") {
-                    finalURL = userText
+                if candidateURL.hasPrefix("http://") || candidateURL.hasPrefix("https://") {
+                    finalURL = candidateURL
                 } else {
-                    finalURL = "http://\(userText)"
+                    finalURL = "http://\(candidateURL)"
                 }
                 
-                NSPasteboard.general().setString("<a href=\"\(finalURL)\">\(userText)</a>", forType: "public.html")
+                NSPasteboard.general().setString("<a href=\"\(finalURL)\">\(candidateURL)</a>", forType: "public.html")
                 NSPasteboard.general().setString(finalURL, forType: "public.utf8-plain-text")
                 
                 if let rootViewController = rootController {
