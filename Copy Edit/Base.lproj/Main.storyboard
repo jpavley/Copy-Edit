@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C41b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+        <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -686,18 +687,75 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="veU-72-xhE">
-                                <rect key="frame" x="18" y="200" width="50" height="50"/>
+                            <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gAU-dE-wAb">
+                                <rect key="frame" x="20" y="26" width="46" height="224"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="veU-72-xhE">
+                                        <rect key="frame" x="-2" y="174" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="82k-B7-F0a"/>
+                                            <constraint firstAttribute="width" constant="46" id="i1p-la-nS5"/>
+                                        </constraints>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="✂️" id="3vV-fL-N82">
+                                            <font key="font" size="32" name="AppleColorEmoji"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8rC-iZ-eK0">
+                                        <rect key="frame" x="-2" y="116" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="DBM-Gu-eZO"/>
+                                            <constraint firstAttribute="width" constant="46" id="WMQ-Qj-MMT"/>
+                                        </constraints>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="📝" id="LhS-E0-MG6">
+                                            <font key="font" size="32" name="AppleColorEmoji"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hdV-kM-1JR">
+                                        <rect key="frame" x="-2" y="58" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="46" id="1e3-De-jXa"/>
+                                            <constraint firstAttribute="height" constant="50" id="dn5-le-KQN"/>
+                                        </constraints>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="🖇" id="J8a-Pd-4NZ">
+                                            <font key="font" size="32" name="AppleColorEmoji"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4ZU-9C-OqC">
+                                        <rect key="frame" x="-2" y="0.0" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="XN6-eZ-3lR"/>
+                                            <constraint firstAttribute="width" constant="46" id="dpN-wR-1Kw"/>
+                                        </constraints>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="🔗" id="wKe-ep-58J">
+                                            <font key="font" size="32" name="AppleColorEmoji"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="82k-B7-F0a"/>
-                                    <constraint firstAttribute="width" constant="46" id="i1p-la-nS5"/>
+                                    <constraint firstAttribute="width" constant="46" id="7Ra-OH-bLx"/>
+                                    <constraint firstAttribute="height" constant="224" id="zbG-qi-0x9"/>
                                 </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="✂️" id="3vV-fL-N82">
-                                    <font key="font" size="32" name="AppleColorEmoji"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
                             <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N02-An-Zas">
                                 <rect key="frame" x="79" y="20" width="381" height="230"/>
                                 <clipView key="contentView" id="gs6-XZ-wBk">
@@ -728,10 +786,13 @@
                         <constraints>
                             <constraint firstItem="N02-An-Zas" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="1XB-7j-asM"/>
                             <constraint firstAttribute="bottom" secondItem="N02-An-Zas" secondAttribute="bottom" constant="20" id="5Id-pU-0gu"/>
+                            <constraint firstItem="gAU-dE-wAb" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="9WB-Fi-zVq"/>
+                            <constraint firstItem="N02-An-Zas" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="Jxv-d2-9B5"/>
                             <constraint firstAttribute="trailing" secondItem="N02-An-Zas" secondAttribute="trailing" constant="20" id="KfX-JB-XDK"/>
-                            <constraint firstItem="N02-An-Zas" firstAttribute="leading" secondItem="veU-72-xhE" secondAttribute="trailing" constant="13" id="Rhr-gM-LOP"/>
-                            <constraint firstItem="veU-72-xhE" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="Vy3-d0-29q"/>
-                            <constraint firstItem="veU-72-xhE" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="n9C-BZ-jdD"/>
+                            <constraint firstItem="N02-An-Zas" firstAttribute="leading" secondItem="gAU-dE-wAb" secondAttribute="trailing" constant="13" id="oB1-WS-1ci"/>
+                            <constraint firstItem="gAU-dE-wAb" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="uv3-Xn-kzL"/>
+                            <constraint firstAttribute="trailing" secondItem="N02-An-Zas" secondAttribute="trailing" constant="20" id="wDB-ln-PMl"/>
+                            <constraint firstAttribute="bottom" secondItem="N02-An-Zas" secondAttribute="bottom" constant="20" id="weQ-6O-orl"/>
                         </constraints>
                     </view>
                     <connections>
