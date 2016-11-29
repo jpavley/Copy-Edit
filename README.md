@@ -22,6 +22,7 @@ link.
 - Written in Swift 3
 - Only runs on macOS, only tested with macOS Sierra 10.12.2 Beta
 - Uses regular expressions to validate URLs and links
+- App doesn't have a regular menu bar or app icon of it's own
 
 ## Thanks Yous
 - https://regex101.com
