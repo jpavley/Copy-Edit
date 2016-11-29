@@ -7,7 +7,7 @@ rich text on the clipboard. Sometimes you want the plain text and not the rich t
 "paste values only" option. Some apps give you a "paste and match style" option which might lead to unexpected 
 results with formatted text. Copy Edit give you a little menu in the status area of the Mac menubar. It works 
 with any app--Copy Edit doesn't have to be the front-most app. Copy Edit lets you view the data on the
-pasteboard (which is what the macOS called the clipboard). Copy edit lets you convert that data to a "plain
+pasteboard (which is what the macOS calls the clipboard). Copy edit lets you convert that data to a "plain
 text" representation. If the data is a URL Copy Edit lets you format that URL as a clickable Markdown or HTML
 link.
 
