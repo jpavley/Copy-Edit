@@ -690,8 +690,15 @@
                             <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gAU-dE-wAb">
                                 <rect key="frame" x="20" y="26" width="46" height="224"/>
                                 <subviews>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5ro-DU-q31">
+                                        <rect key="frame" x="0.0" y="174" width="29" height="50"/>
+                                        <buttonCell key="cell" type="square" title="✂️" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2aw-mc-usq">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="veU-72-xhE">
-                                        <rect key="frame" x="-2" y="174" width="50" height="50"/>
+                                        <rect key="frame" x="-2" y="116" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="82k-B7-F0a"/>
                                             <constraint firstAttribute="width" constant="46" id="i1p-la-nS5"/>
@@ -703,7 +710,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8rC-iZ-eK0">
-                                        <rect key="frame" x="-2" y="116" width="50" height="50"/>
+                                        <rect key="frame" x="-2" y="58" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="DBM-Gu-eZO"/>
                                             <constraint firstAttribute="width" constant="46" id="WMQ-Qj-MMT"/>
@@ -715,24 +722,12 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hdV-kM-1JR">
-                                        <rect key="frame" x="-2" y="58" width="50" height="50"/>
+                                        <rect key="frame" x="-2" y="0.0" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="46" id="1e3-De-jXa"/>
                                             <constraint firstAttribute="height" constant="50" id="dn5-le-KQN"/>
                                         </constraints>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="🖇" id="J8a-Pd-4NZ">
-                                            <font key="font" size="32" name="AppleColorEmoji"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4ZU-9C-OqC">
-                                        <rect key="frame" x="-2" y="0.0" width="50" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="XN6-eZ-3lR"/>
-                                            <constraint firstAttribute="width" constant="46" id="dpN-wR-1Kw"/>
-                                        </constraints>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="🔗" id="wKe-ep-58J">
                                             <font key="font" size="32" name="AppleColorEmoji"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>

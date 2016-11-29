@@ -293,6 +293,7 @@
 				5AFAC5901DEA887F00696C63 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
