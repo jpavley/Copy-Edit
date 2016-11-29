@@ -27,6 +27,7 @@ link.
 ## Installation Notes
 - Download compile in Xcode 8
 - A precompiled version of the can be found in the Copy Edit/Copy Edit 2016-11-28 23-47-45 directory
+- To run the precompiled app you'll have to override your Mac's security settings--which you should never do!
 
 ## Thanks Yous
 - https://regex101.com
