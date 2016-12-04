@@ -16,18 +16,23 @@ that URL as a clickable Markdown or HTML link.
 - Plain Text: tranforms rich text data on the clipboard to plain text data
 - Markdown Link: transforms a plain text URL or HTML formated link to a Markdown link
 - HTML Link: transforms a plain text URL or Markdown formated link to an HTML link
+- Remove Param: Deletes parameters after the query mark (?)
 - Quit: Terminates the app
 
 ## Impletementation details
 - Written in Swift 3
-- Only runs on macOS, only tested with macOS Sierra 10.12.2 Beta
+- Only runs on macOS 10.11 and above, only tested with macOS Sierra 10.12.2 Beta
 - Uses regular expressions to validate URLs and links
 - App doesn't have a regular menu bar or dock icon of it's own
 
 ## Installation Notes
 - Download compile in Xcode 8
-- A precompiled version of the can be found in the Copy Edit/Copy Edit 2016-11-28 23-47-45 directory
+- A precompiled version of the can be found in the Copy Edit/Copy Edit 2016-12-03 23-38-30 directory
 - To run the precompiled app you'll have to override your Mac's security settings--which you should never do!
+
+## Releases
+- 1.0: Initial release
+- 1.1: Target macOS 10.11 and above, added Remove Param command, added version label
 
 ## Thanks Yous
 - https://regex101.com
