@@ -36,6 +36,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //        copyEditMenu.addItem(NSMenuItem.separator())
 //        copyEditMenu.addItem(NSMenuItem(title: "HTML Text", action: #selector(AppDelegate.htmlText), keyEquivalent: ""))
         copyEditMenu.addItem(NSMenuItem(title: "HTML Link", action: #selector(AppDelegate.htmlLink), keyEquivalent: ""))
+        copyEditMenu.addItem(NSMenuItem(title: "Remove Parmas", action: #selector(AppDelegate.removeParam), keyEquivalent: ""))
 //        copyEditMenu.addItem(NSMenuItem(title: "HTML Escaped", action: #selector(AppDelegate.htmlEscaped), keyEquivalent: ""))
         copyEditMenu.addItem(NSMenuItem.separator())
         copyEditMenu.addItem(NSMenuItem(title: "Quit", action: #selector(AppDelegate.quit), keyEquivalent: ""))
@@ -213,6 +214,62 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }
     }
+    
+    func removeParam() {
+        // <a href="http://example.com/">example.com</a>
+        
+        if let userText = getPlainText() {
+            
+            var candidateURL = ""
+            
+            // NOTE: if the userText is a valid Markdown link extract the link so it can be converted to an HTML link
+            
+            if validateURLString(urlString: userText, pattern: markdownLinkPattern) {
+                let matches = regexMatches(for: parenthesesPattern, in: userText)
+                if matches.count > 0 {
+                    let matchedURL = matches[0]
+                    candidateURL = matchedURL.trimmingCharacters(in: CharacterSet.punctuationCharacters)
+                    // print(candidateURL)
+                }
+            }
+            
+            if candidateURL.characters.count == 0 {
+                candidateURL = userText
+            }
+            
+            // NOTE: NSURL thinks that cat.com(cat.com) is a valid URL so I validate with a regular expression first
+            
+            if !validateURLString(urlString: candidateURL, pattern: htmlLinkPattern) {
+                return
+            }
+            
+            if let _ = NSURL(string: candidateURL) {
+                
+                
+                var finalURL = ""
+                
+                if candidateURL.hasPrefix("http://") || candidateURL.hasPrefix("https://") {
+                    finalURL = candidateURL
+                } else {
+                    finalURL = "http://\(candidateURL)"
+                }
+                
+                var urlComponents = finalURL.components(separatedBy: "?")
+                
+                if urlComponents.count > 1 {
+                    NSPasteboard.general().clearContents()
+                    let cleanURL = urlComponents[0]
+                    NSPasteboard.general().setString("<a href=\"\(cleanURL)\">\(cleanURL)</a>", forType: "public.html")
+                    NSPasteboard.general().setString(cleanURL, forType: "public.utf8-plain-text")
+                    
+                    if let rootViewController = rootController {
+                        rootViewController.logger.textStorage?.mutableString.setString(logPasteboard())
+                    }
+                }
+            }
+        }
+    }
+
     
     func htmlEscaped() {
         
