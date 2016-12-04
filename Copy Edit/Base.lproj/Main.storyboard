@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C41b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
@@ -782,11 +782,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D4L-uV-f4d">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="D4L-uV-f4d">
                                 <rect key="frame" x="445" y="0.0" width="37" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="33" id="X8R-wP-upb"/>
+                                    <constraint firstAttribute="height" constant="17" id="ybA-QW-Q6T"/>
+                                </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="v1.1" id="mGL-Su-pFT">
-                                    <font key="font" metaFont="system" size="11"/>
+                                    <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -795,10 +798,12 @@
                         <constraints>
                             <constraint firstItem="N02-An-Zas" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="1XB-7j-asM"/>
                             <constraint firstAttribute="bottom" secondItem="N02-An-Zas" secondAttribute="bottom" constant="20" id="5Id-pU-0gu"/>
+                            <constraint firstAttribute="trailing" secondItem="D4L-uV-f4d" secondAttribute="trailing" id="6jg-f5-jQM"/>
                             <constraint firstItem="gAU-dE-wAb" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="9WB-Fi-zVq"/>
                             <constraint firstItem="N02-An-Zas" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="Jxv-d2-9B5"/>
                             <constraint firstAttribute="trailing" secondItem="N02-An-Zas" secondAttribute="trailing" constant="20" id="KfX-JB-XDK"/>
                             <constraint firstItem="N02-An-Zas" firstAttribute="leading" secondItem="gAU-dE-wAb" secondAttribute="trailing" constant="13" id="oB1-WS-1ci"/>
+                            <constraint firstAttribute="bottom" secondItem="D4L-uV-f4d" secondAttribute="bottom" id="uLG-GM-h0d"/>
                             <constraint firstItem="gAU-dE-wAb" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="uv3-Xn-kzL"/>
                             <constraint firstAttribute="trailing" secondItem="N02-An-Zas" secondAttribute="trailing" constant="20" id="wDB-ln-PMl"/>
                             <constraint firstAttribute="bottom" secondItem="N02-An-Zas" secondAttribute="bottom" constant="20" id="weQ-6O-orl"/>
