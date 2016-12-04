@@ -22,6 +22,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
         
+        // TODO: Set minimum size of frame to 440 x 270
+        
         copyEditStatusItem = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
         copyEditStatusItem?.title = "✂️"
         

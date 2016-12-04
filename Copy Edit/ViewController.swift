@@ -20,6 +20,7 @@ class ViewController: NSViewController {
         
         logger.isEditable = false
         logger.textStorage?.mutableString.setString(logPasteboard())
+        
     }
 
     override var representedObject: Any? {
