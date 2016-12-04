@@ -36,7 +36,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //        copyEditMenu.addItem(NSMenuItem.separator())
 //        copyEditMenu.addItem(NSMenuItem(title: "HTML Text", action: #selector(AppDelegate.htmlText), keyEquivalent: ""))
         copyEditMenu.addItem(NSMenuItem(title: "HTML Link", action: #selector(AppDelegate.htmlLink), keyEquivalent: ""))
-        copyEditMenu.addItem(NSMenuItem(title: "Remove Parmas", action: #selector(AppDelegate.removeParam), keyEquivalent: ""))
+        copyEditMenu.addItem(NSMenuItem(title: "Remove Param", action: #selector(AppDelegate.removeParam), keyEquivalent: ""))
 //        copyEditMenu.addItem(NSMenuItem(title: "HTML Escaped", action: #selector(AppDelegate.htmlEscaped), keyEquivalent: ""))
         copyEditMenu.addItem(NSMenuItem.separator())
         copyEditMenu.addItem(NSMenuItem(title: "Quit", action: #selector(AppDelegate.quit), keyEquivalent: ""))
